@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html dir='ltr'>
+<head>
+<title>Code.org</title>
+
+<meta name="viewport" content="minimal-ui" />
+<meta charset="utf-8" />
+<!--[if IE 9]>
+<meta content='IE=Edge' http-equiv='X-UA-Compatible'>
+<![endif]-->
+<link rel="stylesheet" media="all" href="/assets/application-71b279a97575e160bb30f172aeab792b.css" />
+<script src="/assets/application-fe0a2cb4566774039a83a23bad2bded5.js"></script>
+<meta name="csrf-param" content="authenticity_token" />
+<meta name="csrf-token" content="z4Aoiq27IE25fIfAEb1L4gfvD4ArgDMGuszI/T809ukfK2zJnOvsr21uWJSDYHrFqkN/Oc+Qqs+gkQehrZmRwg==" />
+
+<script>
+  window.dashboard = window.dashboard || {};
+  (function () {
+    // subset of the string table used in JS. not this only supports strings
+    // that don't use params
+    var strs = {
+      less: "MENOS",
+      more: "MÁS",
+      beta: "beta",
+      submit: "Enviar",
+      activerecord: {
+        attributes: {
+          user: {
+            email: "Correo electrónico",
+            age: "Edad",
+          }
+        }
+      },
+      footer: {
+        report_abuse: "Reportar Abuso",
+      },
+      project: {
+        share_title: "Compartir tu proyecto",
+        share_copy_link: "Copiar el enlace:",
+        close: "Cerrar",
+        click_to_remix: "¡Haz clic en \'Remezclar\' para obtener tu propia versión!",
+        remix: "Remezclar",
+        share: "Compartir",
+        rename: "Cambiar nombre",
+        save: "Guardar",
+        my_projects: "Mis proyectos",
+        more: "Más",
+        delete: "Borrar",
+        new: "Crear nuevo",
+        cancel: "Cancelar",
+        delete_confirm_title: "¿Estás seguro de que quieres eliminar este proyecto?",
+        delete_confirm_text: "Al borrar tu proyecto se eliminará permanentemente de tu Lista de proyectos. Las personas que tengan un enlace al mismo no podrán seguir viendo el proyecto una vez que haya sido eliminado.",
+        edit_project: "Editar proyecto",
+        abuse: {
+          tos: "Este proyecto ha sido denunciado por violar los <a href=\'http://code.org/tos\'>Términos de Uso<\/a> y no puede ser compartido con otros.",
+          contact_us: "Si crees que esto es un error, <a href=\'https://code.org/contact\'>contacta con nosotros.<\/a>",
+          go_to_code_studio: "Ve a Code Studio",
+          report_abuse_form: {
+            intro: "Si has encontrado contenido ofensivo, amenazas, intimidación, acoso o alguna instancia de infracción de tus Derechos de Autor por medio del uso de aplicaciones hechas en Code Studio, rellena el siguiente formulario. Tomaremos muy en serio tu informe, investigaremos y tomaremos las medidas correspondientes.",
+            validation: {
+              email: "Indica una dirección de correo electrónico",
+              age: "Especifica tu edad",
+              abuse_type: "Describe cómo este contenido viola los términos del servicio",
+              abuse_detail: "Proporciona detalles sobre el contenido del que estás informando",
+            },
+            abusive_url: "URL de los contenidos que estás reportando",
+            abuse_type: {
+              question: "¿Cómo este contenido viola los %{link_start}Términos del servicio%{link_end}?",
+              harassment: "Amenazas, cíber acoso, acoso",
+              offensive: "Contenido ofensivo",
+              infringement: "Infracción de Derechos de Autor",
+              other: "Otros",
+            },
+            detail: "Proporciona tantos detalles como sea posible sobre el contenido del que estás informando.",
+            acknowledge: "Al enviar esta información, reconoces que se tratará deacuerdo con los términos de %{link_start_privacy}Política de privacidad%{link_end}% y los %{link_start_tos}Términos del Servicio%{link_end}",
+          }
+        }
+      }
+    };
+  
+    window.dashboard.i18n = {
+      /**
+       * Mimics dashboard's I18n.t, getting a string from the hierarchy
+       * @param {string} selector Selector the desired string, i.e. "project.abuse.tos"
+       * @param {object} params Set of key/value pairs where instances of %{key} in the
+       *   string are replaced with value
+       */
+      t: function (selector, params) {
+        var hierarchy = selector.split('.');
+        var current = strs;
+        hierarchy.forEach(function(item) {
+          current = current[item];
+          if (!current) {
+            throw new Error('i18n failed to find string: ' + selector);
+          }
+        });
+        if (typeof(current) !== 'string') {
+          throw new Error('i18n not a leaf: ' + selector);
+        }
+  
+        // Do param replacement
+        Object.keys(params || {}).forEach(function (key) {
+          current = current.replace(new RegExp('%{' + key + '}', 'g'), params[key]);
+        });
+        return current;
+      }
+    };
+  })();
+</script>
+
+</head>
+<body>
+<div class='wrapper'>
+
+<div class='header-wrapper hide_on_mobile'>
+<div class='header hide_on_mobile navbar-static-top'>
+<div class='container' style=''>
+<div class='navbar-header'>
+<div class='row header_row'>
+<div class='header_left'>
+<div class='header_logo'>
+<a href="/"><img src="/assets/codeorg-studio-logo-f590133bdbe0c0456fc84f849141a9e1.png" alt="Codeorg studio logo" /></a>
+</div>
+</div>
+<div class='header_middle'>
+</div>
+<div class='header_right'>
+<span class='freeplay_links'>
+<a class='header_status_bar level_free_play playlab_free_play' href='/projects/playlab' style='display: none;' title='Hacer una aplicación'>
+<i class='fa fa-rocket'></i>
+</a>
+<a class='header_status_bar level_free_play artist_free_play' href='/projects/artist' style='display: none;' title='Dibujar algo'>
+<i class='fa fa-pencil'></i>
+</a>
+<a class='header_status_bar level_free_play calc_free_play' href='/projects/calc' style='display: none;' title='Calculate Something'>
+<i class='fa fa-calculator'></i>
+</a>
+<a class='header_status_bar level_free_play eval_free_play' href='/projects/eval' style='display: none;' title='Dibujar algo'>
+<i class='fa fa-pencil'></i>
+</a>
+<a class='header_status_bar level_free_play applab_free_play' href='/projects/applab' style='display: none;' title='Hacer una aplicación'>
+<i class='fa fa-mobile'></i>
+</a>
+</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class='container main'>
+
+<h1>¿Ya tienes una cuenta? Inicia sesión</h1>
+<p style='margin-bottom:0px'>
+&nbsp;
+</p>
+<div class='row' id='signin'>
+<div class='span8'>
+
+<form class="new_user" id="new_user" action="/users/sign_in" accept-charset="UTF-8" method="post"><input name="utf8" type="hidden" value="&#x2713;" /><input type="hidden" name="authenticity_token" value="Ly58F411Gp7AqXdWOcbD2dUyMEGoy+tW0DiLkrEQTuD/hThUvCXWfBS7qAKrG/L+eJ5A+Ezbcp/KZUTOI70pyw==" /><input type="hidden" name="user[hashed_email]" id="user_hashed_email" />
+<div class='itemblock'>
+<div class='labelblock'>
+Correo electrónico o nombre de usuario
+</div>
+<input autofocus="autofocus" type="text" name="user[login]" id="user_login" />
+</div>
+<br>
+<div class='itemblock'>
+<div class='labelblock'>
+Contraseña
+</div>
+<input type="password" name="user[password]" id="user_password" />
+</div>
+<br>
+<label>
+<input name="user[remember_me]" type="hidden" value="0" /><input style="margin: 0;" type="checkbox" value="1" name="user[remember_me]" id="user_remember_me" />
+Recordarme
+</label>
+<p>
+&nbsp;
+</p>
+<input type="submit" name="commit" value="Iniciar Sesión" class="btn btn-primary btn-large" />
+</form>
+<br>
+<h3>¿Deseas intentar codificar sin registrarse?</h3>
+<div class='tryfirst'>
+<div class='courseblock-span6 courseblock-wide-small'>
+<a href="http://ec2-54-166-157-21.compute-1.amazonaws.com:8080/hoc/reset"><div class='courseblock-span2 imgspan'>
+<img src='//code.org/images/fit-150x100/codehoc3.jpg'>
+</div>
+<div class='courseblock-span4 heading'>
+<h3>Laberinto clásico</h3>
+<div class='smalltext'>Prueba los fundamentos de la Ciencia de la Computación. Millones lo han intentado.</div>
+</div>
+</a></div>
+
+</div>
+<div style='clear:both'></div>
+<br>
+<div class='tryfirst'>
+<div class='courseblock-span6 courseblock-wide-small' style='min-height: 120px;'>
+<a href="http://ec2-54-166-157-21.compute-1.amazonaws.com:8080/en/20-hour"><div class='courseblock-span2 imgspan'>
+<img src='//code.org/images/fit-150x100/code20hr.jpg'>
+</div>
+<div class='courseblock-span4 heading'>
+<h3>Curso acelerado</h3>
+<div class='smalltext'>Aprende ciencias de la computación básicas con una versión acelerada de los cursos 2-4.</div>
+</div>
+<div class='bottombar smalltext audience'>Edades de 10 a 18 años</div>
+
+</a></div>
+
+</div>
+</div>
+<div class='span4'>
+<div style='padding-left: 20px;  border-left: 1px solid black;'>¿Aún no te has unido?
+<a href="/">Registrarse</a>
+<br>
+<br>
+<a href="/users/password/new">¿Olvidaste tu contraseña?</a>
+<br>
+<br>
+<a href="/users/auth/google_oauth2"><img src="/assets/auth/google_oauth2-76a21637c5e731439630100fef5a2fbd.png" alt="Google oauth2" /></a>
+<a class="oauth_sign_in" href="/users/auth/google_oauth2?user_type=student">Iniciar sesión con Cuenta de Google</a>
+<br>
+<br>
+<a href="/users/auth/facebook"><img src="/assets/auth/facebook-6ab0688680892eb8209b58b0bab2e536.png" alt="Facebook" /></a>
+<a class="oauth_sign_in" href="/users/auth/facebook?user_type=student">Iniciar sesión con Facebook</a>
+<br>
+<br>
+<a href="/users/auth/windowslive"><img src="/assets/auth/windowslive-9b1f31c795cd20c5c141655be4f4bcd7.png" alt="Windowslive" /></a>
+<a class="oauth_sign_in" href="/users/auth/windowslive?user_type=student">Iniciar sesión con Cuenta de Microsoft</a>
+<br>
+<br>
+<script>
+  $('.oauth_sign_in').click(dashboard.clientState.reset);
+</script>
+</div>
+</div>
+</div>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<script>
+  $( "#user_login" ).placeholder();
+  
+  
+  $( ".edit_user" ).on("submit", function(e){
+  });
+  
+  $( "#new_user" ).on("submit", function(e){
+    hashEmail({ email_selector: '#user_login',
+                hashed_email_selector: '#user_hashed_email'});
+  
+    dashboard.clientState.reset();
+  });
+</script>
+
+</div>
+<div class='push'></div>
+</div>
+<div class='navbar-static-top footer'>
+<div class='container' style='padding: 10px;'>
+<div class='row'>
+<div class='span8' style=''>
+<a href="https://code.org/translate">Ayúdanos a traducir a tu idioma</a>
+<div class='dim'>
+&nbsp; &nbsp; | &nbsp; &nbsp;
+</div>
+<a href="https://studio.code.org/">Versión segura</a>
+<div class='dim'>
+&nbsp; &nbsp; | &nbsp; &nbsp;
+</div>
+<a href="http://support.code.org">Soporte</a>
+<br>
+<small class='fineprint dim'>
+<br>
+Ingenieros de Google, Microsoft, Facebook y Twitter han ayudado a crear este material.
+<br>
+Microsoft Minecraft™ © 2016. All Rights Reserved. Disney Star Wars™ © 2016 y Lucasfilm. All Rights Reserved. Disney Frozen™ © 2016. All Rights Reserved. Ice Age™ © 2016 20th Century Fox. All Rights Reserved. Angry Birds™ © 2009-2016 Rovio Entertainment Ltd. All Rights Reserved. Plants vs. Zombies™ © 2016 Electronic Arts Inc. All Rights Reserved. El asombroso mundo de Gumball es una marca comercial y © 2015 de Cartoon Network.
+<br>
+Powered by Amazon Web Services
+</small>
+</div>
+<div class='span3' style='text-align: right;'>
+<form id="localeForm" style="margin-bottom: 0px;" action="http://ec2-54-166-157-21.compute-1.amazonaws.com:8080/locale" accept-charset="UTF-8" method="post"><input name="utf8" type="hidden" value="&#x2713;" /><input type="hidden" name="authenticity_token" value="HQ3w9hySIhPVvdM0eK7wyboP4mdlWMRCus6xEn4VU7jNprS1LcLu8QGvDGDqc8HuF6OS3oFIXYugk35O7Lg0kw==" />
+<input type="hidden" name="return_to" id="return_to" value="http://ec2-54-166-157-21.compute-1.amazonaws.com:8080/users/sign_in" />
+<select name="locale" id="locale" onchange="this.form.submit();"><option value="ar-sa">العربية</option>
+<option value="az-az">Azərbaycan dili</option>
+<option value="bg-bg">български</option>
+<option value="bn-bd">বাংলা DBG</option>
+<option value="bs-ba">Bosanski</option>
+<option value="ca-es">Català</option>
+<option value="cs-cz">Čeština</option>
+<option value="da-dk">Dansk</option>
+<option value="de-de">Deutsch</option>
+<option value="el-gr">Ελληνικά</option>
+<option value="en-us">English</option>
+<option value="en-gb">English (UK) DBG</option>
+<option value="en-ploc">Pseudoloc DBG</option>
+<option selected="selected" value="es-es">Español</option>
+<option value="es-ar">Español (Argentina) DBG</option>
+<option value="et-ee">Eesti</option>
+<option value="eu-es">Euskara</option>
+<option value="fa-af">دريلو DBG</option>
+<option value="fa-ir">فارسی</option>
+<option value="fi-fi">Suomi</option>
+<option value="fil-ph">Pilipino DBG</option>
+<option value="fr-fr">Français</option>
+<option value="ga-ie">Gaeilge DBG</option>
+<option value="gl-es">Galiza DBG</option>
+<option value="he-il">עברית</option>
+<option value="hi-in">हिन्दी DBG</option>
+<option value="hr-hr">Hrvatski</option>
+<option value="hu-hu">Magyar</option>
+<option value="hy-am">Հայերեն DBG</option>
+<option value="id-id">Bahasa Indonesia</option>
+<option value="is-is">Íslenska</option>
+<option value="it-it">Italiano</option>
+<option value="ja-jp">日本語</option>
+<option value="ka-ge">ქართული DBG</option>
+<option value="ko-kr">한국어</option>
+<option value="kk-kz">Қазақ Tілі DBG</option>
+<option value="km-kh">ភាសាខ្មែរ DBG</option>
+<option value="ku-iq">Kurdí DBG</option>
+<option value="lt-lt">Lietuvių</option>
+<option value="lv-lv">Latviešu</option>
+<option value="mk-mk">Mакедонски DBG</option>
+<option value="mr-in">मराठी DBG</option>
+<option value="ms-my">بهاس ملايو DBG</option>
+<option value="mt-mt">Malti DBG</option>
+<option value="ne-np">नेपाली DBG</option>
+<option value="nl-nl">Nederlands</option>
+<option value="nn-no">Norsk (nynorsk)</option>
+<option value="no-no">Norsk (bokmål)</option>
+<option value="pl-pl">Polski</option>
+<option value="ps-af">پښتو DBG</option>
+<option value="pt-br">Português (Brasil)</option>
+<option value="pt-pt">Português (Portugal)</option>
+<option value="ro-ro">Română</option>
+<option value="ru-ru">Русский</option>
+<option value="si-lk">සිංහල DBG</option>
+<option value="sk-sk">Slovenčina DBG</option>
+<option value="sl-si">Slovenščina</option>
+<option value="sq-al">Shqip</option>
+<option value="sr-sp">Српски</option>
+<option value="sv-se">Svenska</option>
+<option value="ta-in">தமிழ் DBG</option>
+<option value="th-th">ไทย DBG</option>
+<option value="tr-tr">Türkçe</option>
+<option value="uk-ua">Українська</option>
+<option value="ur-pk">اردو DBG</option>
+<option value="uz-uz">Oʻzbekcha DBG</option>
+<option value="vi-vn">Tiếng Việt</option>
+<option value="zh-cn">简体字</option>
+<option value="zh-tw">繁體字</option>
+<option value="zu-za">isiZulu DBG</option></select>
+</form>
+
+<small class='dim'>
+<a href="//adhoc.code.org/tos">Términos</a>
+&nbsp; &nbsp; | &nbsp; &nbsp;
+<a href="//adhoc.code.org/privacy">Política de Privacidad</a>
+<br>
+<br>
+<br>
+&copy; Code.org, 2016
+</small>
+</div>
+</div>
+</div>
+</div>
+
+
+
+</body>
+</html>
+<script>
+  function trackEvent() {}
+  function ga() {};
+</script>

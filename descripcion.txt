@@ -1,0 +1,20 @@
+Engine: craft
+https://github.com/code-dot-org/craft
+
+Recursos disponibles
+site\blockly\media\skins\craft\images
+
+groundPlane : terreno 
+
+groundDecorationPlane : Adornado del terreno
+
+actionPlane : Objetos que van a interactuar
+
+playerStartPosition: posicion inicial del personaje
+
+playerStartDirection: Hacia donde apunta al inicio
+
+availableBlocks: bloques que se pueden agregar al escenario
+
+verificationFunction: función para validar la meta (usa verificationAPI)
+
