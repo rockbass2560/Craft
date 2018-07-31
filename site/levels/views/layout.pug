@@ -1,0 +1,257 @@
+doctype html
+head
+  title Hora de Code de Minecraft
+  meta(name='viewport' content='minimal-ui')
+  meta(charset='utf-8')
+  //if IE 9
+    meta(content='IE=Edge' http-equiv='X-UA-Compatible')
+  link(rel='stylesheet' media='all' href='/assets/application-71b279a97575e160bb30f172aeab792b.css')
+  script(src='/assets/application-fe0a2cb4566774039a83a23bad2bded5.js')
+  script.
+    window.dashboard = window.dashboard || {};
+    (function () {
+    // subset of the string table used in JS. not this only supports strings
+    // that don't use params
+    var strs = {
+    less: "MENOS",
+    more: "MÁS",
+    beta: "beta",
+    submit: "Enviar",
+    activerecord: {
+    attributes: {
+    user: {
+    email: "Correo electrónico",
+    age: "Edad",
+    }
+    }
+    },
+    footer: {
+    report_abuse: "Reportar Abuso",
+    },
+    project: {
+    share_title: "Compartir tu proyecto",
+    share_copy_link: "Copiar el enlace:",
+    close: "Cerrar",
+    click_to_remix: "¡Haz clic en \\'Remezclar\' para obtener tu propia versión!",
+    remix: "Remezclar",
+    share: "Compartir",
+    rename: "Cambiar nombre",
+    save: "Guardar",
+    my_projects: "Mis proyectos",
+    more: "Más",
+    delete: "Borrar",
+    new: "Crear nuevo",
+    cancel: "Cancelar",
+    delete_confirm_title: "¿Estás seguro de que quieres eliminar este proyecto?",
+    delete_confirm_text: "Al borrar tu proyecto se eliminará permanentemente de tu Lista de proyectos. Las personas que tengan un enlace al mismo no podrán seguir viendo el proyecto una vez que haya sido eliminado.",
+    edit_project: "Editar proyecto",
+    abuse: {
+    tos: "Este proyecto ha sido denunciado por violar los <a href=\\'http://code.org/tos\'>Términos de Uso<\/a> y no puede ser compartido con otros.",
+    contact_us: "Si crees que esto es un error, <a href=\\'https://code.org/contact\'>contacta con nosotros.<\/a>",
+    go_to_code_studio: "Ve a Code Studio",
+    report_abuse_form: {
+    intro: "Si has encontrado contenido ofensivo, amenazas, intimidación, acoso o alguna instancia de infracción de tus Derechos de Autor por medio del uso de aplicaciones hechas en Code Studio, rellena el siguiente formulario. Tomaremos muy en serio tu informe, investigaremos y tomaremos las medidas correspondientes.",
+    validation: {
+    email: "Indica una dirección de correo electrónico",
+    age: "Especifica tu edad",
+    abuse_type: "Describe cómo este contenido viola los términos del servicio",
+    abuse_detail: "Proporciona detalles sobre el contenido del que estás informando",
+    },
+    abusive_url: "URL de los contenidos que estás reportando",
+    abuse_type: {
+    question: "¿Cómo este contenido viola los %{link_start}Términos del servicio%{link_end}?",
+    harassment: "Amenazas, cíber acoso, acoso",
+    offensive: "Contenido ofensivo",
+    infringement: "Infracción de Derechos de Autor",
+    other: "Otros",
+    },
+    detail: "Proporciona tantos detalles como sea posible sobre el contenido del que estás informando.",
+    acknowledge: "Al enviar esta información, reconoces que se tratará deacuerdo con los términos de %{link_start_privacy}Política de privacidad%{link_end}% y los %{link_start_tos}Términos del Servicio%{link_end}",
+    }
+    }
+    }
+    };
+    window.dashboard.i18n = {
+    /**
+    * Mimics dashboard's I18n.t, getting a string from the hierarchy
+    * @param {string} selector Selector the desired string, i.e. "project.abuse.tos"
+    * @param {object} params Set of key/value pairs where instances of %{key} in the
+    *   string are replaced with value
+    */
+    t: function (selector, params) {
+    var hierarchy = selector.split('.');
+    var current = strs;
+    hierarchy.forEach(function(item) {
+    current = current[item];
+    if (!current) {
+    throw new Error('i18n failed to find string: ' + selector);
+    }
+    });
+    if (typeof(current) !== 'string') {
+    throw new Error('i18n not a leaf: ' + selector);
+    }
+    // Do param replacement
+    Object.keys(params || {}).forEach(function (key) {
+    current = current.replace(new RegExp('%{' + key + '}', 'g'), params[key]);
+    });
+    return current;
+    }
+    };
+    })();
+.wrapper
+  .header-wrapper.hide_on_mobile
+    .header.hide_on_mobile.navbar-static-top
+      .container(style='width: 880px;')
+        .navbar-header
+          .row.header_row
+            .header_left
+              .header_logo
+                a(href='/')
+                  img(src='/assets/codeorg-studio-logo-f590133bdbe0c0456fc84f849141a9e1.png' alt='Codeorg studio logo')
+            .header_middle
+              .header_level
+                .header_level_container
+                  .header_text
+                  .progress_container
+                  .header_finished_link(style='display: none;')
+                  span.header_trophy_link(style='display: none;')
+                    .header_text trofeos
+                    .header_status_bar.current_trophies
+                    .header_text.max_trophies
+                  span.header_popup_link(style='display: none;')
+                    .header_popup_link_glyph
+                      | &#x25BC;
+                    .header_popup_link_text M&Aacute;S
+              .header_popup
+                .header_popup_scrollable
+                  .header_popup_header
+                    span
+                      | Tu progreso
+                    .header_text(style='float: right;')
+                  .header_popup_body
+                    .loading
+                .header_popup_footer
+                  .header_popup_close
+                    | CERRAR
+            .header_right
+              span.freeplay_links
+                a.header_status_bar.level_free_play.playlab_free_play(href='/projects/playlab' style='display: none;' title='Hacer una aplicación')
+                  i.fa.fa-rocket
+                a.header_status_bar.level_free_play.artist_free_play(href='/projects/artist' style='display: none;' title='Dibujar algo')
+                  i.fa.fa-pencil
+                a.header_status_bar.level_free_play.calc_free_play(href='/projects/calc' style='display: none;' title='Calculate Something')
+                  i.fa.fa-calculator
+                a.header_status_bar.level_free_play.eval_free_play(href='/projects/eval' style='display: none;' title='Dibujar algo')
+                  i.fa.fa-pencil
+                a.header_status_bar.level_free_play.applab_free_play(href='/projects/applab' style='display: none;' title='Hacer una aplicación')
+                  i.fa.fa-mobile
+              span#sign_in_or_user
+              script.
+                /* STATIC DISABLED */
+                /*
+                $(document).ready(function() {
+                $.ajax({
+                type: "GET",
+                url: '/dashboardapi/user_menu',
+                success: function(data) {
+                $('#sign_in_or_user').html(data);
+                }
+                });
+                });
+                */
+  block dashboardBuild
+  .full_container
+    #notes-content(style='display: none;')
+      ul
+        li
+          a(href='#video')
+            | V&iacute;deo.
+            span.video-name
+        li
+          a(href='#notes-outer') &iquest;No hay v&iacute;deo? Mostrar notas.
+    div(style='display: none;')
+      #reference_area.reference_area
+        p.help_title &iquest;Necesitas ayuda?
+        p.help_subtitle Ver estos v&iacute;deos y sugerencias
+        a.video_link(data-src='https://www.youtube.com/embed/55jADN4Y7Pg/?autoplay=1&cc_lang_pref=es&cc_load_policy=1&enablejsapi=1&iv_load_policy=3&modestbranding=1&rel=0&showinfo=1&v=55jADN4Y7Pg&wmode=transparent' data-key='mc_intro' data-name='Minecraft - Introducción' data-download='/videos/2015/mc/mc_intro.mp4' data-thumbnail='/c/video_thumbnails/154.jpg' data-enable-fallback='true' data-autoplay='true' href='#')
+          img#thumbnail_55jADN4Y7Pg.video_thumbnail(src='/c/video_thumbnails/154.jpg' alt='154')
+          .video_name
+            span Minecraft - Introducci&oacute;n
+        div(style='clear: both;')
+      script.
+        $('.video_link').each(function() {
+        addClickTouchEvent($(this), $.proxy(function() {
+        showVideoDialog({
+        src: $(this).attr('data-src'),
+        name: $(this).attr('data-name'),
+        key: $(this).attr('data-key'),
+        download: $(this).attr('data-download'),
+        thumbnail: $(this).attr('data-thumbnail'),
+        enable_fallback: true,
+        autoplay: true
+        }, true);
+        }, this));
+        });
+        // Allow levels to specify how and where the reference area is rendered.
+        // Reparent the reference area under the target if the target exists.
+        $('#reference_area_target').append($('#reference_area'));
+        // Show only text links if "data-minimal" is set.
+        if ($('#reference_area_target').data('minimal')) {
+        $('#reference_area .video_thumbnail').hide()
+        }
+    #codeApp
+      .loading
+      .slow_load
+        | Esto est&aacute; tardando m&aacute;s tiempo de lo habitual...
+        br
+        a(href='javascript: location.reload();') Intenta volver a cargar la p&aacute;gina
+    img.tracking-pixel(src='https://code.org/api/hour/begin_offline_mc.png' alt='Begin offline mc')
+    script.
+      $(document).ready(function () {
+      var form_selector = '.clone_level';
+      $(form_selector).on('ajax:beforeSend', function (e, xhr) {
+      $('.validation-error').empty();
+      var token = $('meta[name="csrf-token"]').attr('content');
+      xhr.setRequestHeader('X-CSRF-TOKEN', token);
+      });
+      $(form_selector).on('ajax:complete', function (e, data) {
+      if (data.status == "200") {
+      window.location.href = JSON.parse(data.responseText).redirect
+      }
+      });
+      $(form_selector).on("ajax:error", function (evt, xhr, status, error) {
+      var errors, errorText;
+      try {
+      errors = $.parseJSON(xhr.responseText);
+      } catch (err) {
+      errors = {message: "Error (" + error + "): " + xhr.responseText};
+      }
+      $('.validation-error')
+      .html("<p>Couldn't create level:</p>")
+      .append($("<ul/>")
+      .append(Object.keys(errors).map(function (v) {
+      return $("<li/>").text(v + ": " + errors[v]);
+      })));
+      });
+      });
+      $('.clone_level').on('ajax:beforeSend', function (e, xhr) {
+      var validation_error = $('#validation-error').detach();
+      $(e.target).parent().append(validation_error);
+      });
+#page-small-footer
+script.
+  window.dashboard.footer.render(React, {"i18nDropdown":"","copyrightInBase":true,"baseCopyrightString":"Derechos de autor","baseMoreMenuString":"Más","menuItems":[{"text":"Términos de uso","link":"/tos.html","newWindow":true},{"text":"Política de Privacidad","link":"/privacy.html","newWindow":true}],"copyrightStrings":{"thank_you":"Agradecemos%20a%20nuestros%20%3Ca%20href=%22https://code.org/about/donors%22%3Edonantes%3C/a%3E,%20%3Ca%20href=%22https://code.org/about/partners%22%3Easociados%3C/a%3E,%20a%20nuestro%20%3Ca%20href=%22https://code.org/about/team%22%3Eequipo%20ampliado%3C/a%3E%20nuestro%20elenco%20de%20v%C3%ADdeo%20y%20a%20nuestros%20%3Ca%20href=%22https://code.org/about/advisors%22%3Easesores%20acad%C3%A9micos%3C/a%3E%20su%20apoyo%20en%20la%20creaci%C3%B3n%20de%20Code%20Studio.","help_from_html":"En especial queremos reconocer el trabajo de los Ingenieros de Google, Microsoft, Facebook y Twitter que han ayudado a crear estos materiales educativos.","art_from_html":"Microsoft%20Minecraft%E2%84%A2%20%C2%A9%202016.%20Todos%20los%20derechos%20reservados.%3Cbr%20/%3EDisney%20Star%20Wars%E2%84%A2%20%C2%A9%202016%20y%20Lucasfilm.%20Todos%20los%20derechos%20reservados.%3Cbr%20/%3EDisney%20Frozen%E2%84%A2%20%C2%A9%202016.%20Todos%20los%20derechos%20reservados.%3Cbr%20/%3EIce%20Age%E2%84%A2%20%C2%A9%202016%2020th%20Century%20Fox.%20Todos%20los%20derechos%20reservados.%3Cbr%20/%3EAngry%20Birds%E2%84%A2%20%C2%A9%202009-2016%20Rovio%20Entertainment%20Ltd.%20Todos%20los%20derechos%20reservados.%3Cbr%20/%3EPlants%20contra%20Zombies%E2%84%A2%20%C2%A9%202016%20Electronic%20Arts%20Inc.%20Todos%20los%20derechos%20reservados.%3Cbr%20/%3EEl%20asombroso%20mundo%20de%20Gumball%20es%20marca%20comercial%20y%20%C2%A9%202015%20de%20Cartoon%20Network.","powered_by_aws":"Powered by Amazon Web Services","trademark":"%C2%A9%20Code.org,%202016.%20Code.org%C2%AE,%20el%20logotipo%20de%20CODE%20y%20el%20de%20Hora%20de%20Code%20%C2%AE%20son%20marcas%20registradas%20de%20Code.org."}},
+  document.getElementById('page-small-footer'));
+link(href='/assets/css/common-04595c4b1304d25dc1b6286fc9dbc46d.css' rel='stylesheet' type='text/css')
+link(href='/assets/css/craft-cc96fcc96dcadd47b4c80a824f767683.css' rel='stylesheet' type='text/css')
+link(href='/assets/css/colpick-a55db99fda22dbbc08a554d9cebd2abf.css' rel='stylesheet' type='text/css')
+script(src='/assets/js/phaser/phaser-4d2e5fac41327342606a0c8c47b1aef1.js')
+script(src='/assets/js/blockly-2125052e6353ae0f8dd3c681db740869.js')
+script(src='/assets/js/es_es/blockly_locale-9e8c995c49b51b15eaa501a72f12e578.js')
+script(src='/assets/js/marked/marked-5e6364858d12af03c8c3427c15a12c28.js')
+script(src='/assets/shared.min-a1c97f500809ccc433f37d8796cdec08.js')
+script(src='/assets/js/common.min-b9d15a3edac26711fd8d866cd0ebd7bf.js')
+script(src='/assets/js/es_es/common_locale-1c3acec66628411efc39a0b4cf2fc87e.js')
+script(src='/assets/js/es_es/craft_locale-a841eec0d055b0afbe52ff1d80bebbf7.js')
+script(src='/assets/js/craft.min-e5f71a60527644765aa3526b29615a3e.js')
+block appConfiguration
