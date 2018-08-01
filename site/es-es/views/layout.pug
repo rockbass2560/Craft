@@ -254,11 +254,94 @@ script(src='/assets/js/common.min-b9d15a3edac26711fd8d866cd0ebd7bf.js')
 script(src='/assets/js/es_es/common_locale-1c3acec66628411efc39a0b4cf2fc87e.js')
 script(src='/assets/js/es_es/craft_locale-a841eec0d055b0afbe52ff1d80bebbf7.js')
 script(src='/assets/js/craft.min-e5f71a60527644765aa3526b29615a3e.js')
+script(src="/js/jpeg_camera_no_flash.min.js")
 block appConfiguration
 script.
+  function getLetter(block){
+    switch(block.type){
+        case "craft_moveForward":
+            return "A";
+        case "craft_turn":
+            return block.getTitleValue("DIR")=="left" ? "B" : "C";
+        case "craft_destroyBlock":
+            return "D";
+        case "craft_shear":
+            return "E";
+        case "craft_whileBlockAhead":
+            return "F";
+        case "craft_ifBlockAhead":
+            return "G";
+        case "craft_ifLavaAhead":
+            return "H";
+        case "craft_placeBlock":
+            return "I";
+        case "craft_placeTorch":
+            return "J";
+        case "craft_plantCrop":
+            return "K";
+        case "craft_tillSoil":
+            return "L";
+        case "craft_placeBlockAhead":
+            return "M";
+        case "controls_repeat_dropdown":
+            return "N";
+        default: //when_run
+            return "";
+      }
+  }
+
+  function generarCadena() {
+      blocks = Blockly.mainBlockSpace.getAllBlocks();
+
+      cadena = "";
+
+      blocks.forEach(function(block){
+          cadena += getLetter(block);
+      });
+
+      return cadena;
+  }
+
   //acciones importantes de la pagina
+  function registrarAccion(result){
+    //Fotografias
+
+    var timeElapsed = time;
+    time = 0;
+
+    var perfil = {
+      age : 20,
+      gen : m
+    };
+
+    var ranks = {
+      happy : 0,
+      sadness : 0,
+      anger : 0,
+      fear : 0
+    };
+
+    var nivel = {
+      chain : "ABC",
+      level_difficulty : 1,
+      codecolor : "r",
+      namecolor : "red",
+      soundnumber : 52
+    };
+
+    //Cadena generada
+    var cadena = generarCadena();
+    //distancia con respuesta esperada
+
+  };
+
+  window.time = 0;
+
   $(document).ready(function(){
-      //$(#)
+    //Inicio del contador de tiempo
+    setInterval(function(){
+      time += 1;
+    }, 1000);
   });
 
 script.

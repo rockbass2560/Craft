@@ -329,7 +329,7 @@ block appConfiguration
             4
         ],
         "playerStartDirection": 1,
-        "verificationFunction": "function (verificationAPI) {\r\n      return verificationAPI.isPlayerNextTo(\"sheep\");\r\n    }",
+        "verificationFunction": "function (verificationAPI) { var result = verificationAPI.isPlayerNextTo(\"sheep\"); registrarAccion(result); return result;    }",
         "instructions": "Añade un segundo comando \"avanzar\" para llegar a la oveja.",
         "isK1": false,
         "skipInstructionsPopup": false,
