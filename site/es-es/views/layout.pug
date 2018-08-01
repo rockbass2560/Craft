@@ -239,6 +239,7 @@ head
       $(e.target).parent().append(validation_error);
       });
 #page-small-footer
+#camera
 script.
   window.dashboard.footer.render(React, {"i18nDropdown":"","copyrightInBase":true,"baseCopyrightString":"Derechos de autor","baseMoreMenuString":"Más","menuItems":[{"text":"Términos de uso","link":"/tos.html","newWindow":true},{"text":"Política de Privacidad","link":"/privacy.html","newWindow":true}],"copyrightStrings":{"thank_you":"Agradecemos%20a%20nuestros%20%3Ca%20href=%22https://code.org/about/donors%22%3Edonantes%3C/a%3E,%20%3Ca%20href=%22https://code.org/about/partners%22%3Easociados%3C/a%3E,%20a%20nuestro%20%3Ca%20href=%22https://code.org/about/team%22%3Eequipo%20ampliado%3C/a%3E%20nuestro%20elenco%20de%20v%C3%ADdeo%20y%20a%20nuestros%20%3Ca%20href=%22https://code.org/about/advisors%22%3Easesores%20acad%C3%A9micos%3C/a%3E%20su%20apoyo%20en%20la%20creaci%C3%B3n%20de%20Code%20Studio.","help_from_html":"En especial queremos reconocer el trabajo de los Ingenieros de Google, Microsoft, Facebook y Twitter que han ayudado a crear estos materiales educativos.","art_from_html":"Microsoft%20Minecraft%E2%84%A2%20%C2%A9%202016.%20Todos%20los%20derechos%20reservados.%3Cbr%20/%3EDisney%20Star%20Wars%E2%84%A2%20%C2%A9%202016%20y%20Lucasfilm.%20Todos%20los%20derechos%20reservados.%3Cbr%20/%3EDisney%20Frozen%E2%84%A2%20%C2%A9%202016.%20Todos%20los%20derechos%20reservados.%3Cbr%20/%3EIce%20Age%E2%84%A2%20%C2%A9%202016%2020th%20Century%20Fox.%20Todos%20los%20derechos%20reservados.%3Cbr%20/%3EAngry%20Birds%E2%84%A2%20%C2%A9%202009-2016%20Rovio%20Entertainment%20Ltd.%20Todos%20los%20derechos%20reservados.%3Cbr%20/%3EPlants%20contra%20Zombies%E2%84%A2%20%C2%A9%202016%20Electronic%20Arts%20Inc.%20Todos%20los%20derechos%20reservados.%3Cbr%20/%3EEl%20asombroso%20mundo%20de%20Gumball%20es%20marca%20comercial%20y%20%C2%A9%202015%20de%20Cartoon%20Network.","powered_by_aws":"Powered by Amazon Web Services","trademark":"%C2%A9%20Code.org,%202016.%20Code.org%C2%AE,%20el%20logotipo%20de%20CODE%20y%20el%20de%20Hora%20de%20Code%20%C2%AE%20son%20marcas%20registradas%20de%20Code.org."}},
   document.getElementById('page-small-footer'));
@@ -311,14 +312,19 @@ script.
 
     var perfil = {
       age : 20,
-      gen : m
+      gen : "m",
+      name: "Juanito Perez"
     };
 
-    var ranks = {
-      happy : 0,
+    //calificación de las emociones
+    var ranks_emotion = {
+      happiness : 0,
       sadness : 0,
       anger : 0,
-      fear : 0
+      fear : 0,
+      frustration : 0,
+      boredom : 0,
+      //anxiety : 0
     };
 
     var nivel = {
@@ -335,13 +341,16 @@ script.
 
   };
 
-  window.time = 0;
+  var time = 0;
+  var camera;
 
   $(document).ready(function(){
     //Inicio del contador de tiempo
     setInterval(function(){
       time += 1;
     }, 1000);
+
+    camera = new JpegCamera("#camera");
   });
 
 script.
