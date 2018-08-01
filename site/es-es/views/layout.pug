@@ -257,6 +257,8 @@ script(src='/assets/js/craft.min-e5f71a60527644765aa3526b29615a3e.js')
 script(src="/js/jpeg_camera_no_flash.min.js")
 block appConfiguration
 script.
+  var camera;
+
   function getLetter(block){
     switch(block.type){
         case "craft_moveForward":
@@ -305,6 +307,7 @@ script.
   //acciones importantes de la pagina
   function registrarAccion(result){
     //Fotografias
+    tomarFotografias();
 
     var timeElapsed = time;
     time = 0;
@@ -335,14 +338,29 @@ script.
 
   };
 
-  window.time = 0;
+  var time = 0;
 
   $(document).ready(function(){
     //Inicio del contador de tiempo
     setInterval(function(){
       time += 1;
     }, 1000);
+
+    camera = new JpegCamera("#camera");
   });
+
+  var fotografias = [];
+  var fotos = 0;
+
+  function tomarFotografias(){
+    fotografias.push(camera.capture());
+    setTimeout(function(){
+      fotografias.push(camera.capture());
+    }, 250);
+    setTimeout(function(){
+      fotografias.push(camera.capture());
+    }, 500);
+  };
 
 script.
   function trackEvent() {}
