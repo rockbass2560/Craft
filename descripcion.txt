@@ -1,20 +1,42 @@
+﻿sujeto.edad.genero.timestamp
+3 fotografías - 250 milisegundos
+
 Engine: craft
 https://github.com/code-dot-org/craft
 
+//Parametros de la aplicación
 Recursos disponibles
 site\blockly\media\skins\craft\images
 
 groundPlane : terreno 
-
 groundDecorationPlane : Adornado del terreno
-
 actionPlane : Objetos que van a interactuar
-
 playerStartPosition: posicion inicial del personaje
-
 playerStartDirection: Hacia donde apunta al inicio
-
 availableBlocks: bloques que se pueden agregar al escenario
-
 verificationFunction: función para validar la meta (usa verificationAPI)
 
+//API Blocky
+
+Blockly.mainBlockSpace :  espacios de bloque de trabajo
+
+b1.getTitleValue("DIR") : Obtener una opción del menu seleccionada
+
+//API sonidos
+Registrar un audio con un JSON
+{id, urlMP3, urlOGG }
+CDOSounds.register({id:"bebe",mp3:"../../blockly/media/skins/craft/audio/risa.mp3",ogg:"../../blockly/media/skins/craft/audio/risa.ogg"})
+
+Reproducirlo (bebe es el id anterior)
+CDOSounds.soundsById.bebe.play()
+
+//Colores (en la interfaz grafica)
+Clases o id a manipular para cambiar colores
+.wrapper (fondo de la pagina)
+#visualizationColumn (boton, instrucciones, juego)
+.small-footer-base (abajo del juego)
+.header_level (cabecera)
+.blocklySvg (bloques, espacio de trabajo)
+.blocklyFlyoutBackground (propiedad fill, ubicacion de los bloques)
+//Modificar le propiedad desde Style ya que la clase utiliza !important
+$(".blocklyFlyoutBackground").prop({"style": "fill: blue !important"})

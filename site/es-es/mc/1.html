@@ -107,6 +107,8 @@
   })();
 </script>
 
+<script src="../js/custom.js"></script>
+
 </head>
 <body>
 <div class='wrapper'>
@@ -647,7 +649,7 @@ Esto está tardando más tiempo de lo habitual...
 			4
 		],
 		"playerStartDirection": 1,
-		"verificationFunction": "function (verificationAPI) {\r\n      return verificationAPI.isPlayerNextTo(\"sheep\");\r\n    }",
+		"verificationFunction": "function (verificationAPI) {\r\n      var result = verificationAPI.isPlayerNextTo(\"sheep\"); if (result){ test(verificationAPI); }  return result;\r\n    }",
 		"instructions": "Añade un segundo comando \"avanzar\" para llegar a la oveja.",
 		"isK1": false,
 		"skipInstructionsPopup": false,

@@ -596,13 +596,14 @@ require = function e(t, a, s) {
             5: {
                 appSpecificFailError: a.level5FailureMessage(),
                 tooFewBlocksMsg: a.level5FailureMessage(),
-                songs: ["vignette7-funky-chirps-short", "vignette2-quiet", "vignette4-intro", "vignette3"]
+                songs:[]
+                //songs: ["vignette7-funky-chirps-short", "vignette2-quiet", "vignette4-intro", "vignette3"]
             },
             6: {
                 appSpecificFailError: a.level6FailureMessage(),
                 tooFewBlocksMsg: a.level6FailureMessage(),
-                songs: ["vignette1", "vignette2-quiet", "vignette4-intro", "vignette3"],
-                songDelay: 4e3
+                //songs: ["vignette1", "vignette2-quiet", "vignette4-intro", "vignette3"],
+                //songDelay: 4e3
             },
             7: {
                 appSpecificFailError: a.level7FailureMessage(),

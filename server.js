@@ -4,6 +4,7 @@ var app            = express();
 var mongoose       = require('mongoose');
 var bodyParser     = require('body-parser');
 var methodOverride = require('method-override');
+var pug = require("pug");
 
 // configuration ===========================================
 	
@@ -25,8 +26,9 @@ app.use(bodyParser.urlencoded({ extended: true })); // parse application/x-www-f
 app.use(methodOverride('X-HTTP-Method-Override')); // override with the X-HTTP-Method-Override header in the request. simulate DELETE/PUT
 app.use(express.static(__dirname + '/site')); // set the static files location /public/img will be /img for users
 
-app.set("views",__dirname +"/site/levels/views");
-app.set("view engine", "pug");
+app.set("views",__dirname +"/site/es-es/views");
+app.set("view engine", "html");
+app.set("pug", pug.renderFile);
 
 // routes ==================================================
 require('./app/routes')(app); // pass our application into our routes
