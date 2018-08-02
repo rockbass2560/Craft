@@ -27,8 +27,8 @@ app.use(methodOverride('X-HTTP-Method-Override')); // override with the X-HTTP-M
 app.use(express.static(__dirname + '/site')); // set the static files location /public/img will be /img for users
 
 app.set("views",__dirname +"/site/es-es/views");
-app.set("view engine", "html");
-app.set("pug", pug.renderFile);
+app.set("view engine", "pug");
+//app.set("pug", pug.renderFile);
 
 // routes ==================================================
 require('./app/routes')(app); // pass our application into our routes
