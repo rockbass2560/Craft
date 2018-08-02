@@ -332,9 +332,9 @@ script.
 
     //calificación de las emociones
     var ranks_emotion = {
-      happiness : 0,
-      sadness : 0,
-      anger : 0,
+      happy : 0,
+      sad : 0,
+      angry : 0,
       fear : 0,
       frustration : 0,
       boredom : 0,
@@ -355,18 +355,37 @@ script.
     var gain = getEditDistance(nivel.chain, cadena);
 
     //Subir todo
-    jQuery.post({
+    jQuery.ajax({
       type:"POST",
-      url: "/api/guardarEjecucion",
-      data: {
+      url: window.location.origin + "/api/guardarEjecucion",
+      dataType: 'json',
+      contentType: 'application/json',
+      data: JSON.stringify({
         evaluacion : evaluacion,
-        
-      },
-      dataType:"json"
+        time : timeElapsed,
+        name : perfil.name,
+        age : perfil.age,
+        gen : perfil.gen,
+        photos : fotografias,
+        happy : ranks_emotion.happy,
+        sad : ranks_emotion.sad,
+        angry : ranks_emotion.angry,
+        fear : ranks_emotion.fear,
+        frustration : ranks_emotion.frustration,
+        boredom : ranks_emotion.boredom,
+        chain_answer : cadena,
+        chain_level : nivel.chain,
+        gain : gain,
+        level_dificulty : nivel.level_difficulty,
+        codecolor : nivel.codecolor,
+        namecolor : nivel.namecolor,
+        soundnumber : nivel.soundnumber
+      })
     }).done(function(data){
-
+      delete fotografias;
+      fotografias = [];
     }).fail(function(error){
-
+      console.error(error);
     });
   }
 
