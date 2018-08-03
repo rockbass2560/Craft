@@ -16,8 +16,8 @@ var schema_record = new mongoose.Schema({
     chain_answer : String,
     chain_level : String,
     gain : Number,
-    level_dificulty : Number,
-    codecolor : Number,
+    level_difficulty : Number,
+    codecolor : String,
     namecolor : String,
     soundnumber : Number
 });

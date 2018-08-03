@@ -47,11 +47,30 @@ module.exports = function(app) {
     app.post("/api/guardarEjecucion", function(req, res){
 
         //Guardar en base de datos
-        Record.insert(req.body, function(result){
+        Record.create({
+            evaluacion : req.body.evaluacion,
+            time : req.body.time,
+            name : req.body.name,
+            age : req.body.age,
+            gen : req.body.gen,
+            photos : req.body.photos,
+            happy : req.body.happy,
+            sad : req.body.sad,
+            angry : req.body.angry,
+            fear : req.body.fear,
+            frustration : req.body.frustration,
+            boredom : req.body.boredom,
+            chain_answer : req.body.chain_answer,
+            chain_level : req.body.chain_level,
+            gain : req.body.gain,
+            level_difficulty : req.body.level_difficulty,
+            codecolor : req.body.codecolor,
+            namecolor : req.body.namecolor,
+            soundnumber : req.body.soundnumber
+          }, function(err, result){
 
-
-
-            res.send("OK");
+            if (!err)
+                res.json("{result:'OK'}");
         });
     });
 
