@@ -260,6 +260,7 @@ script(src="/es-es/js/jpeg_camera_no_flash.min.js")
 script(src="/es-es/js/levenshtein.js")
 
 block appConfiguration
+
 script.
   function getLetter(block){
     switch(block.type){
@@ -315,8 +316,15 @@ script.
     time = 0;
 
     resultado = result;
-    //Fotografias
-    tomarFotografias();
+
+    var verificarFotografia = function(){
+      if (fotosTomadas==3)
+        subirDatos();
+      else
+        setTimeout(verificarFotografia, 500);
+    }
+
+    setTimeout(verificarFotografia, 500);
   };
 
   function subirDatos(){
@@ -378,20 +386,39 @@ script.
         level_difficulty : nivel.level_difficulty,
         codecolor : nivel.codecolor,
         namecolor : nivel.namecolor,
-        soundnumber : nivel.soundnumber
+        soundnumber : nivel.soundnumber,
+        result : resultado
       })
     }).done(function(data){
       console.log("Record OK");
     }).fail(function(error){
       console.error(error);
-    }).always(function(){
-      delete fotografias;
-      fotografias = [];
     });
   }
 
   var time = 0;
   var camera;
+  var fotografias = [];
+  var fotosTomadas = 0;
+
+  var guardar_foto = function(canvas_data){
+    fotografias.push(canvas_data.toDataURL("image/jpeg"));
+    fotosTomadas += 1;
+    this.discard();
+  };  
+
+  function tomarFotografias(){
+    delete fotografias;
+    fotografias = [];
+    fotosTomadas = 0;
+    camera.capture().get_canvas(guardar_foto);
+    setTimeout(function(){
+      camera.capture().get_canvas(guardar_foto);
+    }, 250);
+    setTimeout(function(){
+      camera.capture().get_canvas(guardar_foto);
+    }, 500);
+  };
 
   $(document).ready(function(){
     //Inicio del contador de tiempo
@@ -401,31 +428,24 @@ script.
 
     camera = new JpegCamera("#camera",{
       shutter : false,
+    }).ready(function(){
+      $("#camera").hide();
     });
-  });
 
-  var fotografias = [];
-  var fotosTomadas = 0;
+    var configurarRunButton = function(){
+      var runButton = $("#runButton");
 
-  var guardar_foto = function(canvas_data){
-    fotografias.push(canvas_data.toDataURL("image/jpeg"));
-    fotosTomadas += 1;
-    this.discard();
-    if (fotosTomadas==3){
-      subirDatos();
-      fotoTomadas = 0;
+      if (runButton.is("button")){
+        $("#runButton").click(function(){ 
+          tomarFotografias();
+        });
+      }else{
+        setTimeout(configurarRunButton, 200);
+      }
     }
-  };  
 
-  function tomarFotografias(){
-    camera.capture().get_canvas(guardar_foto);
-    setTimeout(function(){
-      camera.capture().get_canvas(guardar_foto);
-    }, 250);
-    setTimeout(function(){
-      camera.capture().get_canvas(guardar_foto);
-    }, 500);
-  };
+    configurarRunButton();
+  });
 
 script.
   function trackEvent() {}

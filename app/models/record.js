@@ -19,7 +19,8 @@ var schema_record = new mongoose.Schema({
     level_difficulty : Number,
     codecolor : String,
     namecolor : String,
-    soundnumber : Number
+    soundnumber : Number,
+    result : Boolean
 });
 
 module.exports = mongoose.model("Record",schema_record,"Record");

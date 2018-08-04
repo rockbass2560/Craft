@@ -66,7 +66,8 @@ module.exports = function(app) {
             level_difficulty : req.body.level_difficulty,
             codecolor : req.body.codecolor,
             namecolor : req.body.namecolor,
-            soundnumber : req.body.soundnumber
+            soundnumber : req.body.soundnumber,
+            result : req.body.result
           }, function(err, result){
 
             if (!err)
