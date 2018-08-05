@@ -1,1 +1,62 @@
-<html><head><meta http-equiv="refresh" content="0;url=/es-es/mc/1"></head></html>
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+
+        <link rel="stylesheet" href="css/bootstrap.min.css">
+
+        <script src="js/jquery.min.js"></script>
+        <script src="js/bootstrap.min.js"></script>
+
+        <style>
+            .tab-pane:not(.active) {
+                display: none;
+            }
+        </style>
+    </head>
+    <body>
+        <nav>
+            <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                <a class="nav-item nav-link active" id="nav-registrarse-tab" data-toggle="tab" href="#nav-registrarse" role="tab" aria-controls="nav-registrarse" aria-selected="true">Registrarse</a>
+                <a class="nav-item nav-link" id="nav-sesion-tab" data-toggle="tab" href="#nav-sesion" role="tab" aria-controls="nav-sesion" aria-selected="false">Iniciar Sesión</a>
+            </div>
+        </nav>
+        <div class="tab-content" id="nav-tabContent">
+            <div class="tab-pane fade show active" id="nav-registrarse" role="tabpanel" aria-labelledby="nav-registrarse-tab">
+                <form>
+                    <div class="row">
+                        <div class="form-group col-sm-6 mx-auto">
+                            <label for="name">Nombre</label>
+                            <input type="text" class="form-control" id="name" required>
+                        </div>
+                    </div>
+                   
+                    <div class="row"></div>
+                        <div class="form-group col-sm-6 mx-auto">
+                            <label for="age">Edad</label>
+                            <input type="text" class="form-control" id="age" required>
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="form-group col-sm-6 mx-auto">
+                            <label for="gen">Genero</label>
+                            <select class="form-control" name="gen" id="gen" required>
+                                <option value="m">Masculino</option>
+                                <option value="f">Femenino</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6 mx-auto">
+                            <input type="submit" class="btn btn-primary" id="btnRegistrar" value="Registrar">
+                        </div>
+                    </div>                    
+                </form>
+            </div>
+            <div class="tab-pane fade" id="nav-sesion" role="tabpanel" aria-labelledby="nav-sesion-tab">
+                Iniciar Sesion
+            </div>
+        </div>
+    </body>
+</html>
