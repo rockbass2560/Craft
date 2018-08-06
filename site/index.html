@@ -4,37 +4,64 @@
         <meta charset="utf8" />
 
         <link rel="stylesheet" href="css/bootstrap.min.css">
-        <link rel="stylesheet" href="css/bootstrap-select.min.css">
 
         <script src="js/jquery.min.js"></script>
-        <script src="js/popper.min.js"></script>
         <script src="js/bootstrap.min.js"></script>
-
-        <script src="js/bootstrap-select.js"></script>
 
         <script>
             $(document).ready(function(){
+                var mapGen = function(gen){
+                    return (gen=="m") ? "Masculino" : "Femenino";
+                };
+
+                window.listaPersonas = [];
+
+                var cambiarPersona = function(persona){
+                    sessionStorage.setItem("persona", JSON.stringify(persona));
+                    $("#nameValidacion").val(persona.name);
+                    $("#ageValidacion").val(persona.age);
+                    $("#genValidacion").val(mapGen(persona.gen));
+                }
+
+                $("#idValidacion").change(function(event){
+                    var index = $(this).prop('selectedIndex');
+                    cambiarPersona(listaPersonas[Number(index)]);
+                });
+
                 //cargar lista de personas
                 (function(){
                     $.get("/api/listaPersonas", function(data){
                         var idValidacion =$("#idValidacion");
                         data.forEach(function(persona){
-                            idValidacion.append("<option value='"+persona.id+"'>Id: "+ persona.id+" Nombre: "+persona.name+" Edad: "+persona.age+" Genero: "+persona.gen +"</option>");
+                            idValidacion.append("<option value='"+persona.id+"'>Id: "+ persona.id+" Nombre: "+persona.name+" Edad: "+persona.age+" Genero: "+mapGen(persona.gen) +"</option>");
                         });
+
+                        listaPersonas = data;
+
+                        if (data.length>0){
+                            cambiarPersona(data[0]);
+                        }
                     });
                 })();
 
                 $("#validarSubmit").submit(function(event){
                     var id = $("#idValidacion").val();
 
-                    $.get("/api/validarPersona/"+id, function(data){
-                        if (data.result == "OK"){
-                            $("#nameValidacion").val(data.persona.name);
-                            $("#ageValidacion").val(data.persona.age);
-                            $("#genValidacion").val(data.persona.gen);
-                            $("#evaluacionValidacion").val(data.persona.evaluacion);
+                    $.post("/api/validarPersona/"+id, {persona: JSON.parse(sessionStorage.getItem("persona"))}, 
+                        function(data){
+                            if (data.result == "OK"){
+                                var persona = JSON.parse(sessionStorage.getItem("persona"));
+                                persona.evaluacion = data.evaluacion;
+                                sessionStorage.setItem("persona", JSON.stringify(persona));
+
+                                $("#evaluacionValidacion").val(data.evaluacion);
+
+                                //Habilitación de botones
+                                $("#btnValidar").prop('disabled', true);
+                                $("#btnEvaluacion2").removeClass('disabled');
+                            }
                         }
-                    });
+                    );
 
                     event.preventDefault();
                 });
@@ -65,7 +92,7 @@
                             $("#btnEvaluacion1").removeClass('disabled');
                         }
                     }).fail(function(error){
-
+                        console.error(error);
                     });;
 
                     event.preventDefault();
@@ -169,8 +196,8 @@
     
                         <div class="row">
                             <div class="col-sm-6 mx-auto">
-                                <input type="submit" class="btn btn-primary" id="btnValidar" value="Validar">
-                                <a href="/es-es/mc/1" class="btn btn-secondary disabled" id="btnEvaluacion1">Iniciar Sesion</a>
+                                <input type="submit" class="btn btn-primary" id="btnValidar" value="Crear Evaluación">
+                                <a href="/es-es/mc/1" class="btn btn-secondary disabled" id="btnEvaluacion2">Iniciar Sesion</a>
                             </div>
                         </div>
                     </form>

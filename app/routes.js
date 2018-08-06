@@ -14,6 +14,7 @@ module.exports = function(app) {
                 persona : doc.id
             }, function(err, docEval){
                 var persona = {
+                    _id : doc._id,
                     id : doc.id,
                     name : doc.name,
                     age : doc.age,
@@ -26,27 +27,12 @@ module.exports = function(app) {
         });
     };
 
-    app.get("/api/validarPersona/:id", function(req, res){
-
-        var id = req.params.id;
-
-        Persona.find({id:id}, function(err, docs){
-            if (!err){
-                if (docs.length > 1){
-                    crearEvaluacion(docs[0], function(newDoc){
-                        res.json({
-                            persona : docs,
-                            result : "OK"
-                        });
-                    });
-                }
-                else
-                    res.json({
-                        result: "Inconsistent"
-                    });
-            }else{
-                res.sendStatus(500);
-            }
+    app.post("/api/validarPersona/:id", function(req, res){
+        crearEvaluacion(req.body.persona, function(newDoc){
+            res.json({
+                evaluacion : newDoc.evaluacion,
+                result : "OK"
+            });
         });
     });
 
