@@ -4,16 +4,45 @@
         <meta charset="utf8" />
 
         <link rel="stylesheet" href="css/bootstrap.min.css">
+        <link rel="stylesheet" href="css/bootstrap-select.min.css">
 
         <script src="js/jquery.min.js"></script>
+        <script src="js/popper.min.js"></script>
         <script src="js/bootstrap.min.js"></script>
+
+        <script src="js/bootstrap-select.js"></script>
 
         <script>
             $(document).ready(function(){
+                //cargar lista de personas
+                (function(){
+                    $.get("/api/listaPersonas", function(data){
+                        var idValidacion =$("#idValidacion");
+                        data.forEach(function(persona){
+                            idValidacion.append("<option value='"+persona.id+"'>Id: "+ persona.id+" Nombre: "+persona.name+" Edad: "+persona.age+" Genero: "+persona.gen +"</option>");
+                        });
+                    });
+                })();
+
+                $("#validarSubmit").submit(function(event){
+                    var id = $("#idValidacion").val();
+
+                    $.get("/api/validarPersona/"+id, function(data){
+                        if (data.result == "OK"){
+                            $("#nameValidacion").val(data.persona.name);
+                            $("#ageValidacion").val(data.persona.age);
+                            $("#genValidacion").val(data.persona.gen);
+                            $("#evaluacionValidacion").val(data.persona.evaluacion);
+                        }
+                    });
+
+                    event.preventDefault();
+                });
+
                 $("#registrarseSubmit").submit(function(event){
-                    var name = $("#name").val();
-                    var age = $("#age").val();
-                    var gen = $("#gen").val();
+                    var name = $("#nameRegistro").val();
+                    var age = $("#ageRegistro").val();
+                    var gen = $("#genRegistro").val();
 
                     $.ajax({
                         type:"POST",
@@ -28,12 +57,12 @@
                             //Informar Id del usuario y dar la opción de iniciar sesión, así como guardar el usuario en sesion
                             sessionStorage.setItem("persona", JSON.stringify(data.persona));
 
-                            $("#id").val(data.persona.id);
-                            $("#evaluacion").val(data.persona.evaluacion);
+                            $("#idRegistro").val(data.persona.id);
+                            $("#evaluacionRegistro").val(data.persona.evaluacion);
 
                             //Habilitación de botones
                             $("#btnRegistrar").prop('disabled', true);
-                            $("#btnEvaluacion").removeClass('disabled');
+                            $("#btnEvaluacion1").removeClass('disabled');
                         }
                     }).fail(function(error){
 
@@ -56,22 +85,22 @@
                 <form id="registrarseSubmit">
                     <div class="row">
                         <div class="form-group col-sm-6 mx-auto">
-                            <label for="name">Nombre</label>
-                            <input type="text" class="form-control" id="name" required>
+                            <label for="nameRegistro">Nombre</label>
+                            <input type="text" class="form-control" id="nameRegistro" required>
                         </div>
                     </div>
                    
                     <div class="row">
                         <div class="form-group col-sm-6 mx-auto">
-                            <label for="age">Edad</label>
-                            <input type="text" class="form-control" id="age" required>
+                            <label for="ageRegistro">Edad</label>
+                            <input type="text" class="form-control" id="ageRegistro" required>
                         </div>
                     </div>
                     
                     <div class="row">
                         <div class="form-group col-sm-6 mx-auto">
-                            <label for="gen">Genero</label>
-                            <select class="form-control" name="gen" id="gen" required>
+                            <label for="genRegistro">Genero</label>
+                            <select class="form-control" id="genRegistro" required>
                                 <option value="m">Masculino</option>
                                 <option value="f">Femenino</option>
                             </select>
@@ -80,28 +109,71 @@
 
                     <div class="row">
                         <div class="form-group col-sm-6 mx-auto">
-                            <label for="id">ID generado</label>
-                            <input readonly class="form-control-plaintext" type="number" id="id">
+                            <label for="idRegistro">ID Generado</label>
+                            <input readonly class="form-control-plaintext" type="number" id="idRegistro">
                         </div>
                     </div>
 
                     <div class="row">
                         <div class="form-group col-sm-6 mx-auto">
-                            <label for="evaluacion">Numero de evaluación</label>
-                            <input readonly class="form-control-plaintext" type="number" id="evaluacion">
+                            <label for="evaluacionRegistro">Numero de evaluación</label>
+                            <input readonly class="form-control-plaintext" type="number" id="evaluacionRegistro">
                         </div>
                     </div>
 
                     <div class="row">
                         <div class="col-sm-6 mx-auto">
                             <input type="submit" class="btn btn-primary" id="btnRegistrar" value="Registrar">
-                            <a href="/es-es/mc/1" class="btn btn-secondary disabled" id="btnEvaluacion">Iniciar Sesion</a>
+                            <a href="/es-es/mc/1" class="btn btn-secondary disabled" id="btnEvaluacion1">Iniciar Sesion</a>
                         </div>
                     </div>
                 </form>
             </div>
             <div class="tab-pane fade" id="nav-sesion" role="tabpanel" aria-labelledby="nav-sesion-tab">
-                Iniciar Sesion
+                    <form id="validarSubmit">
+                        <div class="row">
+                            <div class="form-group col-sm-6 mx-auto">
+                                <label for="nameValidacion">Nombre</label>
+                                <input type="text" class="form-control-plaintext" id="nameValidacion" readonly>
+                            </div>
+                        </div>
+                        
+                        <div class="row">
+                            <div class="form-group col-sm-6 mx-auto">
+                                <label for="ageValidacion">Edad</label>
+                                <input type="text" class="form-control-plaintext" id="ageValidacion" readonly>
+                            </div>
+                        </div>
+                        
+                        <div class="row">
+                            <div class="form-group col-sm-6 mx-auto">
+                                <label for="genValidacion">Genero</label>
+                                <input type="text" class="form-control-plaintext" id="genValidacion" readonly>
+                            </div>
+                        </div>
+    
+                        <div class="row">
+                            <div class="form-group col-sm-6 mx-auto">
+                                <label for="idValidacion">ID Registrado</label>
+                                <select class="form-control" id="idValidacion" required>
+                                </select>
+                            </div>
+                        </div>
+    
+                        <div class="row">
+                            <div class="form-group col-sm-6 mx-auto">
+                                <label for="evaluacionValidacion">Numero de evaluación</label>
+                                <input class="form-control-plaintext" type="number" id="evaluacionValidacion" readonly>
+                            </div>
+                        </div>
+    
+                        <div class="row">
+                            <div class="col-sm-6 mx-auto">
+                                <input type="submit" class="btn btn-primary" id="btnValidar" value="Validar">
+                                <a href="/es-es/mc/1" class="btn btn-secondary disabled" id="btnEvaluacion1">Iniciar Sesion</a>
+                            </div>
+                        </div>
+                    </form>
             </div>
         </div>
     </body>

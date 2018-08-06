@@ -26,6 +26,40 @@ module.exports = function(app) {
         });
     };
 
+    app.get("/api/validarPersona/:id", function(req, res){
+
+        var id = req.params.id;
+
+        Persona.find({id:id}, function(err, docs){
+            if (!err){
+                if (docs.length > 1){
+                    crearEvaluacion(docs[0], function(newDoc){
+                        res.json({
+                            persona : docs,
+                            result : "OK"
+                        });
+                    });
+                }
+                else
+                    res.json({
+                        result: "Inconsistent"
+                    });
+            }else{
+                res.sendStatus(500);
+            }
+        });
+    });
+
+    app.get("/api/listaPersonas", function(req, res){
+        Persona.find(function(err, docs){
+            if (!err){
+                return res.json(docs);
+            }else{
+                res.sendStatus(500);
+            }
+        });
+    });
+
     app.post("/api/registrarUsuario", function(req, res){
         var name = req.body.name;
         var age = req.body.age;
