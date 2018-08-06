@@ -1,7 +1,58 @@
 var fs = require("fs");
 var Record = require("./models/record");
+var Persona = require("./models/persona");
+var Evaluacion = require("./models/evaluacion");
+
 
 module.exports = function(app) {
+
+    var crearEvaluacion = function(doc, success){
+        //crear numero de evaluación y enlazarla con el estudiante
+        Evaluacion.countDocuments(function(err, number){
+            Evaluacion.create({
+                id : number + 1,
+                persona : doc.id
+            }, function(err, docEval){
+                var persona = {
+                    id : doc.id,
+                    name : doc.name,
+                    age : doc.age,
+                    gen : doc.gen,
+                    evaluacion : docEval.id
+                }
+                
+                success(persona);
+            });
+        });
+    };
+
+    app.post("/api/registrarUsuario", function(req, res){
+        var name = req.body.name;
+        var age = req.body.age;
+        var gen = req.body.gen;
+
+        Persona.countDocuments(function(err, number){
+            //Guardado
+            Persona.create({
+                id : number + 1,
+                name : name,
+                age : age,
+                gen : gen
+            }, function(err, doc){
+
+                if (!err){
+                    crearEvaluacion(doc, function(newDoc){
+                        res.json({
+                            result : "OK",
+                            persona : newDoc
+                        });
+                    });
+                }else{
+                    res.send("Ha ocurrido un error al momento de guardar al usuario en el servidor");
+                }
+            });
+        });
+    });
 
     //Middleware para procesar las fotografías
     app.post("/api/guardarEjecucion", function(req, res, next){

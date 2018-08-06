@@ -1,18 +1,48 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+        <meta charset="utf8" />
 
         <link rel="stylesheet" href="css/bootstrap.min.css">
 
         <script src="js/jquery.min.js"></script>
         <script src="js/bootstrap.min.js"></script>
 
-        <style>
-            .tab-pane:not(.active) {
-                display: none;
-            }
-        </style>
+        <script>
+            $(document).ready(function(){
+                $("#registrarseSubmit").submit(function(event){
+                    var name = $("#name").val();
+                    var age = $("#age").val();
+                    var gen = $("#gen").val();
+
+                    $.ajax({
+                        type:"POST",
+                        url: "/api/registrarUsuario",
+                        data:{
+                            name : name,
+                            age : age,
+                            gen : gen
+                        },
+                    }).done(function(data){
+                        if (data.result == "OK"){
+                            //Informar Id del usuario y dar la opción de iniciar sesión, así como guardar el usuario en sesion
+                            sessionStorage.setItem("persona", JSON.stringify(data.persona));
+
+                            $("#id").val(data.persona.id);
+                            $("#evaluacion").val(data.persona.evaluacion);
+
+                            //Habilitación de botones
+                            $("#btnRegistrar").prop('disabled', true);
+                            $("#btnEvaluacion").removeClass('disabled');
+                        }
+                    }).fail(function(error){
+
+                    });;
+
+                    event.preventDefault();
+                });
+            });
+        </script>
     </head>
     <body>
         <nav>
@@ -23,7 +53,7 @@
         </nav>
         <div class="tab-content" id="nav-tabContent">
             <div class="tab-pane fade show active" id="nav-registrarse" role="tabpanel" aria-labelledby="nav-registrarse-tab">
-                <form>
+                <form id="registrarseSubmit">
                     <div class="row">
                         <div class="form-group col-sm-6 mx-auto">
                             <label for="name">Nombre</label>
@@ -31,7 +61,7 @@
                         </div>
                     </div>
                    
-                    <div class="row"></div>
+                    <div class="row">
                         <div class="form-group col-sm-6 mx-auto">
                             <label for="age">Edad</label>
                             <input type="text" class="form-control" id="age" required>
@@ -47,11 +77,27 @@
                             </select>
                         </div>
                     </div>
+
+                    <div class="row">
+                        <div class="form-group col-sm-6 mx-auto">
+                            <label for="id">ID generado</label>
+                            <input readonly class="form-control-plaintext" type="number" id="id">
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="form-group col-sm-6 mx-auto">
+                            <label for="evaluacion">Numero de evaluación</label>
+                            <input readonly class="form-control-plaintext" type="number" id="evaluacion">
+                        </div>
+                    </div>
+
                     <div class="row">
                         <div class="col-sm-6 mx-auto">
                             <input type="submit" class="btn btn-primary" id="btnRegistrar" value="Registrar">
+                            <a href="/es-es/mc/1" class="btn btn-secondary disabled" id="btnEvaluacion">Iniciar Sesion</a>
                         </div>
-                    </div>                    
+                    </div>
                 </form>
             </div>
             <div class="tab-pane fade" id="nav-sesion" role="tabpanel" aria-labelledby="nav-sesion-tab">
