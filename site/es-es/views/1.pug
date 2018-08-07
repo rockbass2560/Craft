@@ -2,7 +2,72 @@ extends layout.pug
 
 block dashboardBuild
     script.
-        dashboard.buildHeader({"script_id":71,"script_name":"mc","script_stages":1,"freeplay_links":["playlab","artist"],"id":534,"position":1,"name":"Hora de Code de Minecraft","title":"Hora de Code de Minecraft","levels":[{"id":1122,"position":1,"kind":"puzzle","title":1,"url":"/levels/mc/1.html","previous":false},{"id":1106,"position":2,"kind":"puzzle","title":2,"url":"/levels/mc/2.html"},{"id":1126,"position":3,"kind":"puzzle","title":3,"url":"/levels/mc/3.html"},{"id":1107,"position":4,"kind":"puzzle","title":4,"url":"/levels/mc/4.html"},{"id":1123,"position":5,"kind":"puzzle","title":5,"url":"/levels/mc/5.html"},{"id":1119,"position":6,"kind":"puzzle","title":6,"url":"/levels/mc/6.html"},{"id":1124,"position":7,"kind":"puzzle","title":7,"url":"/levels/mc/7.html"},{"id":1105,"position":8,"kind":"puzzle","title":8,"url":"/levels/mc/8.html"},{"id":1666,"position":9,"kind":"puzzle","title":9,"url":"/levels/mc/9.html"},{"id":1664,"position":10,"kind":"puzzle","title":10,"url":"/levels/mc/10.html"},{"id":1661,"position":11,"kind":"puzzle","title":11,"url":"/levels/mc/11.html"},{"id":1662,"position":12,"kind":"puzzle","title":12,"url":"/levels/mc/12.html"},{"id":1125,"position":13,"kind":"puzzle","title":13,"url":"/levels/mc/13.html"},{"id":1108,"position":14,"kind":"puzzle","title":14,"url":"/levels/mc/14.html","next":false}],"finishLink":"congrats.html","finishText":"He terminado mi Hora de Code"}, null, 1122, null, null, "mc");
+        dashboard.buildHeader({
+            "script_id": 71,
+            "script_name": "mc",
+            "script_stages": 1,
+            "freeplay_links": [],
+            "id": 534,
+            "position": 1,
+            "name": "",
+            "title": "",
+            "levels": [
+                        {
+                            "id": 1122,
+                            "position": 1,
+                            "kind": "puzzle",
+                            "title": 1,
+                            "url": "/levels/mc/1",
+                            "previous": false
+                        },
+                        {
+                            "id": 1106,
+                            "position": 2,
+                            "kind": "puzzle",
+                            "title": 2,
+                            "url": "/levels/mc/2"
+                        },
+                        {
+                            "id": 1126,
+                            "position": 3,
+                            "kind": "puzzle",
+                            "title": 3,
+                            "url": "/levels/mc/3"
+                        },
+                        {
+                            "id": 1107,
+                            "position": 4,
+                            "kind": "puzzle",
+                            "title": 4,
+                            "url": "/levels/mc/4"
+                        },
+                        {
+                            "id": 1123,
+                            "position": 5,
+                            "kind": "puzzle",
+                            "title": 5,
+                            "url": "/levels/mc/5"
+                        },
+                        {
+                            "id": 1119,
+                            "position": 6,
+                            "kind": "puzzle",
+                            "title": 6,
+                            "url": "/levels/mc/6"
+                        },
+                        {
+                            "id": 1124,
+                            "position": 7,
+                            "kind": "puzzle",
+                            "title": 7,
+                            "url": "/levels/mc/7",
+                            "next": false
+                        }
+                    ],
+                "finishLink": "#",
+                "finishText": ""
+            }
+            , null, 1122, null, null, "mc");
 
 block appConfiguration
     script.

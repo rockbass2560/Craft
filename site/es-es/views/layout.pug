@@ -6,6 +6,7 @@ head
   //if IE 9
     meta(content='IE=Edge' http-equiv='X-UA-Compatible')
   link(rel='stylesheet' media='all' href='/assets/application-71b279a97575e160bb30f172aeab792b.css')
+  link(rel="stylesheet" href="../css/main.css")
   script(src='/assets/application-fe0a2cb4566774039a83a23bad2bded5.js')
   script.
     window.dashboard = window.dashboard || {};
@@ -105,7 +106,7 @@ head
         .navbar-header
           .row.header_row
             .header_left
-              .header_logo
+              //-.header_logo
                 a(href='/')
                   img(src='/assets/codeorg-studio-logo-f590133bdbe0c0456fc84f849141a9e1.png' alt='Codeorg studio logo')
             .header_middle
@@ -239,6 +240,38 @@ head
       $(e.target).parent().append(validation_error);
       });
 #page-small-footer
+.ventanaCompleta
+  #evaluacionEmocion.configuracionVentana
+    p Feliz:!{' '}
+      span(id="spanHappy")
+    img(src="../images/emojis/happy.png")
+    <div id="sliderHappy"></div>
+    br
+    p Triste:!{' '}
+      span(id="spanSad")
+    img(src="../images/emojis/sad.png")
+    <div id="sliderSad"></div>
+    br
+    p Enojado!{' '}
+      span(id="spanAngry")
+    img(src="../images/emojis/angry.png")
+    <div id="sliderAngry"></div>
+    br
+    p Asustado!{' '}
+      span(id="spanFear")
+    img(src="../images/emojis/angry.png")
+    <div id="sliderFear"></div>
+    br
+    p Frustrado!{' '}
+      span(id="spanFrustration")
+    img(src="../images/emojis/frustration.png")
+    <div id="sliderFrustration"></div>
+    br
+    p Aburrido!{' '}
+      span(id="spanBoredom")
+    img(src="../images/emojis/boredom.png")
+    <div id="sliderBoredom"></div>
+    button#calificar Calificar
 #camera(style="position:absolute;height:600px; width:800px;top:0;left:0;")
 script.
   window.dashboard.footer.render(React, {"i18nDropdown":"","copyrightInBase":true,"baseCopyrightString":"Derechos de autor","baseMoreMenuString":"Más","menuItems":[{"text":"Términos de uso","link":"/tos.html","newWindow":true},{"text":"Política de Privacidad","link":"/privacy.html","newWindow":true}],"copyrightStrings":{"thank_you":"Agradecemos%20a%20nuestros%20%3Ca%20href=%22https://code.org/about/donors%22%3Edonantes%3C/a%3E,%20%3Ca%20href=%22https://code.org/about/partners%22%3Easociados%3C/a%3E,%20a%20nuestro%20%3Ca%20href=%22https://code.org/about/team%22%3Eequipo%20ampliado%3C/a%3E%20nuestro%20elenco%20de%20v%C3%ADdeo%20y%20a%20nuestros%20%3Ca%20href=%22https://code.org/about/advisors%22%3Easesores%20acad%C3%A9micos%3C/a%3E%20su%20apoyo%20en%20la%20creaci%C3%B3n%20de%20Code%20Studio.","help_from_html":"En especial queremos reconocer el trabajo de los Ingenieros de Google, Microsoft, Facebook y Twitter que han ayudado a crear estos materiales educativos.","art_from_html":"Microsoft%20Minecraft%E2%84%A2%20%C2%A9%202016.%20Todos%20los%20derechos%20reservados.%3Cbr%20/%3EDisney%20Star%20Wars%E2%84%A2%20%C2%A9%202016%20y%20Lucasfilm.%20Todos%20los%20derechos%20reservados.%3Cbr%20/%3EDisney%20Frozen%E2%84%A2%20%C2%A9%202016.%20Todos%20los%20derechos%20reservados.%3Cbr%20/%3EIce%20Age%E2%84%A2%20%C2%A9%202016%2020th%20Century%20Fox.%20Todos%20los%20derechos%20reservados.%3Cbr%20/%3EAngry%20Birds%E2%84%A2%20%C2%A9%202009-2016%20Rovio%20Entertainment%20Ltd.%20Todos%20los%20derechos%20reservados.%3Cbr%20/%3EPlants%20contra%20Zombies%E2%84%A2%20%C2%A9%202016%20Electronic%20Arts%20Inc.%20Todos%20los%20derechos%20reservados.%3Cbr%20/%3EEl%20asombroso%20mundo%20de%20Gumball%20es%20marca%20comercial%20y%20%C2%A9%202015%20de%20Cartoon%20Network.","powered_by_aws":"Powered by Amazon Web Services","trademark":"%C2%A9%20Code.org,%202016.%20Code.org%C2%AE,%20el%20logotipo%20de%20CODE%20y%20el%20de%20Hora%20de%20Code%20%C2%AE%20son%20marcas%20registradas%20de%20Code.org."}},
@@ -317,38 +350,31 @@ script.
 
     resultado = result;
 
-    var verificarFotografia = function(){
-      if (fotosTomadas==3)
-        subirDatos();
-      else
-        setTimeout(verificarFotografia, 500);
-    }
-
-    setTimeout(verificarFotografia, 500);
+    registrarEmocion();
   };
 
-  function subirDatos(){
-    
-    //Datos dummy
-    var evaluacion = 1;
-
-    var perfil = {
-      age : 20,
-      gen : "m",
-      name: "Juanito Perez"
-    };
-
-    //calificación de las emociones
-    var ranks_emotion = {
+  function registrarEmocion(){
+    //calificación de las emociones, se reinician
+    ranks_emotion = {
       happy : 0,
       sad : 0,
       angry : 0,
       fear : 0,
       frustration : 0,
       boredom : 0,
-      //anxiety : 0
     };
+    //Se reinician sliders
+    $("#sliderHappy, #sliderSad, #sliderAngry, #sliderFear, #sliderFrustration, #sliderBoredom").slider("value", 0);
+    //Se muestra la ventana
+    $(".ventanaCompleta").show();
+  }
 
+  function subirDatos(){
+    
+    //Datos reales de la aplicación
+    var persona = JSON.parse(sessionStorage.getItem("persona"));
+
+    //Datos dummy
     var nivel = {
       chain : "ABC",
       level_difficulty : 1,
@@ -368,11 +394,11 @@ script.
       url: window.location.origin + "/api/guardarEjecucion",
       contentType: 'application/json',
       data: JSON.stringify({
-        evaluacion : evaluacion,
+        evaluacion : persona.evaluacion,
         time : timeElapsed,
-        name : perfil.name,
-        age : perfil.age,
-        gen : perfil.gen,
+        name : persona.name,
+        age : persona.age,
+        gen : persona.gen,
         photos : fotografias,
         happy : ranks_emotion.happy,
         sad : ranks_emotion.sad,
@@ -400,6 +426,7 @@ script.
   var camera;
   var fotografias = [];
   var fotosTomadas = 0;
+  var ranks_emotion = {};
 
   var guardar_foto = function(canvas_data){
     fotografias.push(canvas_data.toDataURL("image/jpeg"));
@@ -445,6 +472,44 @@ script.
     }
 
     configurarRunButton();
+
+    //Configurar Sliders
+    var sliders = $("#sliderHappy, #sliderSad, #sliderAngry, #sliderFear, #sliderFrustration, #sliderBoredom");
+    sliders.slider({
+        animate: true,
+        max: 7,
+        min: 1
+    });
+    $.each(sliders, function(index, slider){
+        var id = slider.id.replace("slider","#span");
+        var slider = $(slider);
+        $(id).text(slider.slider("value"));
+        $(slider).on( "slidechange", function( event, ui ) {
+          $(this.id.replace("slider","#span")).text(ui.value);
+        });
+      }
+    );
+    $("#calificar").click(function(){
+      //Se construye objeto para envío de datos
+      ranks_emotion = {
+        happy : $("#sliderHappy").slider("value"),
+        sad : $("#sliderSad").slider("value"),
+        angry : $("#sliderAngry").slider("value"),
+        fear : $("#sliderFear").slider("value"),
+        frustration : $("#sliderFrustration").slider("value"),
+        boredom : $("#sliderBoredom").slider("value"),
+      };
+      //Se esconde la ventana
+      $(".ventanaCompleta").hide();
+      //Se verifica que ya se tomaron las fotografías y se suben los datos
+      var verificarFotografia = function(){
+        if (fotosTomadas==3)
+          subirDatos();
+        else
+          setTimeout(verificarFotografia, 500);
+      }
+      verificarFotografia();
+    });
   });
 
 script.

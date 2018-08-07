@@ -1,0 +1,36 @@
+.ventanaCompleta {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    overflow: auto;
+    z-index: 1;
+    background-color : rgb(0,0,0);
+    background-color : rgba(0,0,0,0.4);
+    display: none;
+}
+
+.configuracionVentana{
+    width : 800px;
+    height: 430px;
+    background-color: white;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+}
+
+.configuracionVentana img{
+    width: 30px;
+    height: 30px;
+    padding-left: 2px;
+}
+
+.configuracionVentana p{
+    width: 100px;
+    display: inline-block;
+}
+
+.configuracionVentana span{
+    text-align: right;
+}
