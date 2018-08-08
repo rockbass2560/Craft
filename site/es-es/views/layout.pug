@@ -328,8 +328,52 @@ script.
       }
   }
 
+  function getPointBlock(block){
+    switch(block.type){
+        case "craft_moveForward":
+            return 1;
+        case "craft_turn":
+            return 2
+        case "craft_destroyBlock":
+            return 1;
+        case "craft_shear":
+            return 2;
+        case "craft_whileBlockAhead":
+            return 3;
+        case "craft_ifBlockAhead":
+            return 4;
+        case "craft_ifLavaAhead":
+            return 3;
+        case "craft_placeBlock":
+            return 2;
+        case "craft_placeTorch":
+            return 1;
+        case "craft_plantCrop":
+            return 2;
+        case "craft_tillSoil":
+            return 3;
+        case "craft_placeBlockAhead":
+            return 4;
+        case "controls_repeat_dropdown":
+            return 5;
+        default: //when_run
+            return "";
+      }
+  }
+
+  function obtenerPuntaje(){
+    var blocks = Blockly.mainBlockSpace.getAllBlocks();
+    suma = 0;
+
+    blocks.forEach(function(block){
+      suma+=getPointBlock(block);
+    });
+
+    return suma;
+  }
+
   function generarCadena() {
-      blocks = Blockly.mainBlockSpace.getAllBlocks();
+      var blocks = Blockly.mainBlockSpace.getAllBlocks();
 
       cadena = "";
 

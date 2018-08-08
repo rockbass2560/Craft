@@ -640,7 +640,7 @@ Esto está tardando más tiempo de lo habitual...
       7
     ],
     "playerStartDirection": 0,
-    "verificationFunction": "function (verificationAPI) {\r\n      return verificationAPI.countOfTypeOnMap(\"treeSpruce\") === 0;\r\n    }\r\n",
+    "verificationFunction": "function (verificationAPI) {\r\n  var result = verificationAPI.countOfTypeOnMap(\"treeSpruce\") === 0;\r\n registrarAccion(result); return result;   }\r\n",
     "instructions": "La madera es un recurso muy importante. Sirve para hacer muchas cosas. Ve hacia el árbol y usa el comando \"destruir bloque\" para talarlo.",
     "isK1": false,
     "skipInstructionsPopup": false,

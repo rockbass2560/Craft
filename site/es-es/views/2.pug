@@ -5,10 +5,10 @@ block dashboardBuild
         dashboard.buildHeader({
             "script_id": 71,
             "script_name": "mc",
-            "script_stages": 1,
+            "script_stages": 2,
             "freeplay_links": [],
             "id": 534,
-            "position": 1,
+            "position": 2,
             "name": "",
             "title": "",
             "levels": [
@@ -67,12 +67,12 @@ block dashboardBuild
                 "finishLink": "#",
                 "finishText": ""
             }
-            , null, 1122, null, null, "mc");
+            , null, 1106, null, null, "mc");
 
 block appConfiguration
     script.
         //<![CDATA[
-        var script_path = "/es-es/mc/1";
+        var script_path = "/es-es/mc/2";
         var appOptions = {
         "levelGameName": "Craft",
         "skinId": "craft",
@@ -80,7 +80,6 @@ block appConfiguration
         "app": "craft",
         "levelId": "custom",
         "level": {
-            "startBlocks": "<xml><block type=\"when_run\" deletable=\"false\" movable=\"false\"><next><block type=\"craft_moveForward\"/></next></block></xml>",
             "toolbox":"<xml><block type=\"craft_plantCrop\"/><block type=\"craft_destroyBlock\"/><block type=\"craft_turn\"><title name=\"DIR\">left</title></block><block type=\"craft_turn\"><title name=\"DIR\">right</title></block></xml>",
             "skin": "craft",
             "groundPlane": [
@@ -391,8 +390,7 @@ block appConfiguration
             ],
             "fluffPlane": "[\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\"]",
             "playerStartPosition": [
-                3,
-                4
+                5,5
             ],
             "playerStartDirection": 1,
             "verificationFunction": "function (verificationAPI) { var result = verificationAPI.isPlayerNextTo(\"sheep\"); registrarAccion(result); return result;  }",
@@ -413,7 +411,7 @@ block appConfiguration
             "definitionHighlight": false,
             "definitionCollapse": false,
             "disableExamples": false,
-            "showPopupOnLoad": "playerSelection",
+            "showPopupOnLoad": null,
             "isDaytime": true,
             "availableBlocks": [
                 "bedrock",
@@ -506,15 +504,7 @@ block appConfiguration
             "localized_text": "Arrastra un bloque \"avanzar\" y acóplalo bajo otro bloque."
         }
         ],
-        "autoplayVideo": {
-        "src": "https://www.youtube.com/embed/55jADN4Y7Pg/?autoplay=1&cc_lang_pref=es&cc_load_policy=1&enablejsapi=1&iv_load_policy=3&modestbranding=1&rel=0&showinfo=1&v=55jADN4Y7Pg&wmode=transparent",
-        "key": "mc_intro",
-        "name": "Minecraft - Introducción",
-        "download": "/videos/2015/mc/mc_intro.mp4",
-        "thumbnail": "/c/video_thumbnails/154.jpg",
-        "enable_fallback": true,
-        "autoplay": true
-        },
+        "autoplayVideo": null,
         "postMilestone": true,
         "serverLevelId": 1122,
         "stagePosition": 1,
@@ -552,3 +542,7 @@ block appConfiguration
         apps.setupApp(appOptions);
         apps.load(apps.init);
         //]]>
+        var nivel = {
+            chain : "AAB",
+            level_difficulty : 1,
+        };
