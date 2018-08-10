@@ -322,7 +322,8 @@ script.
         case "craft_placeBlockAhead":
             return "M";
         case "controls_repeat_dropdown":
-            return "N";
+            var numero = block.inputList[0].titleRow[1].getText();
+            return "N"+numero;
         default: //when_run
             return "";
       }
@@ -374,15 +375,6 @@ script.
     //Datos reales de la aplicación
     var persona = JSON.parse(sessionStorage.getItem("persona"));
 
-    //Datos dummy
-    var nivel = {
-      chain : "ABC",
-      level_difficulty : 1,
-      codecolor : "r",
-      namecolor : "red",
-      soundnumber : 52
-    };
-
     //Cadena generada
     var cadena = generarCadena();
     //distancia con respuesta esperada
@@ -417,6 +409,8 @@ script.
       })
     }).done(function(data){
       console.log("Record OK");
+      if (resultado) //Si es verdadero es que se resolvió bien
+        window.location.href = nivel.nextLevel;
     }).fail(function(error){
       console.error(error);
     });
