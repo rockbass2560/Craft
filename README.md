@@ -1,1 +1,1 @@
-# Minecraft_Learning
+Proyecto dedicado al desarrollo de una herramienta de enseñanza en programación utilizando un videojuego basado en Minecraft. El proyecto ha sufrido modificaciones para cambiar sonidos, colores y ejercicios acorde a un estudio que se encuentra actualmente en desarrollo.
